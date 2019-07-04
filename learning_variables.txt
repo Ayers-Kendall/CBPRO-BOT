@@ -1,0 +1,6 @@
+wall_criteria = 100
+master_trigger_sensitivity = 1
+trigger_sensitivity_list = [1,1,1,1]
+success_wedge = 50
+success_possible_breakout = 50
+success_breakout = 50
