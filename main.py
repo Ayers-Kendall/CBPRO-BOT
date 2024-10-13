@@ -33,23 +33,20 @@ ws_client = MyWebsocketClient()
 public_client = cbpro.PublicClient()
 client = [auth_client, public_client]
 mode = 1           # set to 0 for real run, -1 or 1 for test run
-log = open("log.txt", "w+")
-log_orders = open("order_log.txt", "a+")
-log_prices = open("price_log.txt", "a+")
-log_learning = open("learning_variables.txt", "r")
-quote_track = {'ETH-USD': [], 'BTC-USD': [], 'LTC-USD': []}
-delay = 0       # used to run select parts every "delay" iterations
-stats = client[mode].get_product_24hr_stats('ETH-USD')
-current_product = 'ETH-USD'
-trigger_walls_on = True
-all_triggers_off = False
-account_ids = {"USD": 0, "BTC": 0, "ETH": 0, "LTC": 0}
-# --------------------------------------- #
-
-# ------- Possibly Future Machine Learning Variables ------- #
-lin = []
-for line in log_learning.readlines():
-    lin.append(line)
+with open("learning_variables.txt", "r") as log_learning:
+    quote_track = {'ETH-USD': [], 'BTC-USD': [], 'LTC-USD': []}
+    delay = 0       # used to run select parts every "delay" iterations
+    stats = client[mode].get_product_24hr_stats('ETH-USD')
+    current_product = 'ETH-USD'
+    trigger_walls_on = True
+    all_triggers_off = False
+    account_ids = {"USD": 0, "BTC": 0, "ETH": 0, "LTC": 0}
+    # --------------------------------------- #
+    
+    # ------- Possibly Future Machine Learning Variables ------- #
+    lin = []
+    for line in log_learning.readlines():
+        lin.append(line)
 
 wall_criteria = float(lin[0][(lin[0].index('=') + 2):])
 master_trigger_sensitivity = float(lin[1][(lin[1].index('=') + 2):])
